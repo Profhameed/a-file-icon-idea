@@ -113,7 +113,7 @@ allprojects {
 
   intellijPlatform {
     buildSearchableOptions = false
-    instrumentCode = true
+    // instrumentCode = true
   }
 
 
@@ -170,7 +170,7 @@ allprojects {
 
 intellijPlatform {
   buildSearchableOptions = false
-  instrumentCode = true
+  // instrumentCode = true
 
   projectName = pluginName
 
