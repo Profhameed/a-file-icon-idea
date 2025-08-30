@@ -2,12 +2,17 @@
 
 ----
 
+## 101.3.0 (10.1.4)
+
+### Fixes
+
+- Improve icons searching perforance (thanks @KrisAphalon)
+
 ## 101.2.1 (10.1.3)
 
 ### Fixes
 
 - Performance Improvement by using cache for known non-existent resources
-
 
 ## 101.2.0 (10.1.2)
 
