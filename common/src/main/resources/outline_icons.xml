@@ -25,6 +25,7 @@
 <root>
   <iconReplacement icon="/outline/add.svg">
     <replacePath path="/actions/addFile.svg"/>
+    <replacePath path="/expui/actions/addFile.svg"/>
     <replacePath path="/expui/bookmarks/addBookmarksList.svg"/>
     <replacePath path="/expui/general/add.svg"/>
     <replacePath path="/fileTypes/addAny.svg"/>
@@ -486,12 +487,18 @@
     <replacePath path="/general/fitContent.svg"/>
   </iconReplacement>
 
+  <iconReplacement icon="/outline/folderGenerated.svg">
+    <replacePath path="/actions/generated.svg"/>
+    <replacePath path="/expui/actions/generated.svg"/>
+  </iconReplacement>
+
   <iconReplacement icon="/outline/forward.svg">
     <replacePath path="/actions/findForward.svg"/>
     <replacePath path="/actions/forward.svg"/>
     <replacePath path="/actions/nextfile.svg"/>
     <replacePath path="/actions/play_forward.svg"/>
     <replacePath path="/debugger/nextStatement.svg"/>
+    <replacePath path="/expui/actions/playForward.svg"/>
     <replacePath path="/expui/breakpoints/nextStatement.svg"/>
     <replacePath path="/expui/general/right.svg"/>
   </iconReplacement>
@@ -683,9 +690,11 @@
   <iconReplacement icon="/outline/memory.svg">
     <replacePath path="/actions/profileCPU.svg"/>
     <replacePath path="/actions/profileMemory.svg"/>
+    <replacePath path="/actions/profileRed.svg"/>
     <replacePath path="/actions/startMemoryProfile.svg"/>
     <replacePath path="/expui/actions/profileCPU.svg"/>
     <replacePath path="/expui/actions/profileMemory.svg"/>
+    <replacePath path="/expui/actions/profileRed.svg"/>
     <replacePath path="/expui/actions/startMemoryProfile.svg"/>
   </iconReplacement>
 
@@ -913,6 +922,7 @@
 
   <iconReplacement icon="/outline/replace.svg">
     <replacePath path="/actions/menu-replace.svg"/>
+    <replacePath path="/expui/actions/replace.svg"/>
   </iconReplacement>
 
   <iconReplacement icon="/outline/report.svg">
@@ -1290,6 +1300,10 @@
     <replacePath path="/general/inspectionsOKEmpty.svg"/>
     <replacePath path="/expui/general/inspectionsOKEmpty.svg"/>
     <replacePath path="/expui/general/inspections/inspectionsOKEmpty.svg"/>
+  </iconReplacement>
+
+  <iconReplacement icon="/outline/valid.svg">
+    <replacePath path="/expui/actions/checked.svg"/>
   </iconReplacement>
 
   <iconReplacement icon="/outline/validSmall.svg">
