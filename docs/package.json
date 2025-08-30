@@ -7,7 +7,9 @@
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "copy-icons": "cp -R ../iconGenerator/assets/icons ./public/icons",
+    "prebuild": "npm run copy-icons"
   },
   "dependencies": {
     "@astrojs/starlight": "^0.35.2",
