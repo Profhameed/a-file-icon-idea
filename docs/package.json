@@ -8,7 +8,7 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "copy-icons": "cp -R ../iconGenerator/assets/icons ./public/icons",
+    "copy-icons": "mkdir -p ./public/icons && cp -R ../iconGenerator/assets/icons ./public/icons",
     "prebuild": "npm run copy-icons"
   },
   "dependencies": {
