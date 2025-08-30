@@ -1,0 +1,787 @@
+---
+const title = "Icon Gallery - Atom Material Icons";
+const description = "Browse and search through all available icons in the Atom Material Icons plugin.";
+
+// Get all icon files from the project
+import { glob } from 'glob';
+import path from 'path';
+import fs from 'fs';
+
+// Function to parse XML and get icon associations
+async function getIconAssociations() {
+  try {
+    const xmlPath = path.resolve('../src/main/resources/iconGenerator/icon_associations.xml');
+    const xmlContent = fs.readFileSync(xmlPath, 'utf8');
+
+    // Simple XML parsing for associations - extract regex and type elements
+    const associations = {};
+
+    // Match regex elements
+    const regexMatches = xmlContent.matchAll(/<regex[^>]*fileNames="([^"]*)"[^>]*name="([^"]*)"[^>]*iconColor="([^"]*)"[^>]*priority="([^"]*)"[^>]*pattern="([^"]*)"[^>]*icon="([^"]*)"/g);
+    for (const match of regexMatches) {
+      const [, fileNames, name, iconColor, priority, pattern, icon] = match;
+      const iconName = icon.split('/').pop()?.replace('.svg', '') || '';
+      if (iconName) {
+        associations[iconName] = {
+          name,
+          iconColor: `#${iconColor}`,
+          priority: parseInt(priority),
+          pattern,
+          fileNames,
+          icon,
+          type: 'regex'
+        };
+      }
+    }
+
+    // Match type elements
+    const typeMatches = xmlContent.matchAll(/<type[^>]*name="([^"]*)"[^>]*iconColor="([^"]*)"[^>]*priority="([^"]*)"[^>]*icon="([^"]*)"/g);
+    for (const match of typeMatches) {
+      const [, name, iconColor, priority, icon] = match;
+      const iconName = icon.split('/').pop()?.replace('.svg', '') || '';
+      if (iconName) {
+        associations[iconName] = {
+          name,
+          iconColor: `#${iconColor}`,
+          priority: parseInt(priority),
+          pattern: 'Type-based association',
+          fileNames: 'N/A',
+          icon,
+          type: 'type'
+        };
+      }
+    }
+
+    return associations;
+  } catch (error) {
+    console.error('Error loading icon associations:', error);
+    return {};
+  }
+}
+
+// Function to get all SVG files from icon directories
+async function getAllIcons() {
+  const iconCategories = {
+    files: [],
+    folders: [],
+    foldersOpen: [],
+    ui: []
+  };
+
+  const baseIconPath = path.resolve('../iconGenerator/assets/icons');
+  const associations = await getIconAssociations();
+
+  try {
+    // Get file icons
+    const fileIcons = await glob('*.svg', { cwd: path.join(baseIconPath, 'files') });
+    iconCategories.files = fileIcons.map(icon => ({
+      name: icon.replace('.svg', ''),
+      path: `/icons/files/${icon}`,
+      category: 'files',
+      association: associations[icon.replace('.svg', '')] || null
+    }));
+
+    // Get folder icons
+    const folderIcons = await glob('*.svg', { cwd: path.join(baseIconPath, 'folders') });
+    iconCategories.folders = folderIcons.map(icon => ({
+      name: icon.replace('.svg', ''),
+      path: `/icons/folders/${icon}`,
+      category: 'folders',
+      association: associations[icon.replace('.svg', '')] || null
+    }));
+
+    // Get folder open icons
+    const folderOpenIcons = await glob('*.svg', { cwd: path.join(baseIconPath, 'foldersOpen') });
+    iconCategories.foldersOpen = folderOpenIcons.map(icon => ({
+      name: icon.replace('.svg', ''),
+      path: `/icons/foldersOpen/${icon}`,
+      category: 'foldersOpen',
+      association: associations[icon.replace('.svg', '')] || null
+    }));
+
+    // Get UI icons
+    const uiIcons = await glob('*.svg', { cwd: path.join(baseIconPath, 'ui') });
+    iconCategories.ui = uiIcons.map(icon => ({
+      name: icon.replace('.svg', ''),
+      path: `/icons/ui/${icon}`,
+      category: 'ui',
+      association: associations[icon.replace('.svg', '')] || null
+    }));
+  } catch (error) {
+    console.error('Error loading icons:', error);
+  }
+
+  return iconCategories;
+}
+
+const icons = await getAllIcons();
+
+// Sort each category alphabetically
+icons.files.sort((a, b) => a.name.localeCompare(b.name));
+icons.folders.sort((a, b) => a.name.localeCompare(b.name));
+icons.foldersOpen.sort((a, b) => a.name.localeCompare(b.name));
+icons.ui.sort((a, b) => a.name.localeCompare(b.name));
+
+const allIcons = [
+  ...icons.files,
+  ...icons.folders,
+  ...icons.foldersOpen,
+  ...icons.ui
+];
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+		<meta name="description" content={description} />
+		<style>
+			:root {
+				--sl-color-accent-low: #1e293b;
+				--sl-color-accent: #3b82f6;
+				--sl-color-accent-high: #dbeafe;
+				--sl-color-text: #0f172a;
+				--sl-color-text-accent: #3b82f6;
+				--sl-color-bg: #ffffff;
+				--sl-color-bg-nav: #f8fafc;
+				--sl-color-bg-sidebar: #f1f5f9;
+				--sl-color-hairline-light: #e2e8f0;
+				--sl-color-hairline: #cbd5e1;
+			}
+
+			* {
+				margin: 0;
+				padding: 0;
+				box-sizing: border-box;
+			}
+
+			body {
+				font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+				line-height: 1.6;
+				color: var(--sl-color-text);
+				background-color: var(--sl-color-bg-nav);
+				min-height: 100vh;
+			}
+
+			.container {
+				max-width: 1400px;
+				margin: 0 auto;
+				padding: 2rem;
+			}
+
+			.nav-header {
+				background: var(--sl-color-bg);
+				border: 1px solid var(--sl-color-hairline-light);
+				border-radius: 0.75rem;
+				padding: 1rem 1.5rem;
+				margin-bottom: 2rem;
+				box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+			}
+
+			.nav-header a {
+				color: var(--sl-color-text-accent);
+				text-decoration: none;
+				font-weight: 500;
+				transition: color 0.2s ease;
+			}
+
+			.nav-header a:hover {
+				color: var(--sl-color-accent);
+				text-decoration: underline;
+			}
+
+			.content {
+				background: var(--sl-color-bg);
+				border-radius: 1rem;
+				padding: 3rem;
+				box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+				border: 1px solid var(--sl-color-hairline-light);
+			}
+
+			h1 {
+				color: var(--sl-color-text);
+				font-size: 2.5rem;
+				font-weight: 800;
+				margin-bottom: 1rem;
+				text-align: center;
+			}
+
+			.search-section {
+				margin: 2rem 0;
+				text-align: center;
+			}
+
+			.search-input {
+				width: 100%;
+				max-width: 500px;
+				padding: 0.75rem 1rem;
+				font-size: 1rem;
+				border: 1px solid var(--sl-color-hairline);
+				border-radius: 0.5rem;
+				outline: none;
+				transition: all 0.2s ease;
+				background: var(--sl-color-bg);
+				color: var(--sl-color-text);
+			}
+
+			.search-input:focus {
+				border-color: var(--sl-color-accent);
+				box-shadow: 0 0 0 3px var(--sl-color-accent-high);
+			}
+
+			.filter-buttons {
+				margin: 1rem 0;
+				display: flex;
+				gap: 0.5rem;
+				justify-content: center;
+				flex-wrap: wrap;
+			}
+
+			.filter-btn {
+				padding: 0.5rem 1rem;
+				border: 1px solid var(--sl-color-hairline);
+				background: var(--sl-color-bg);
+				color: var(--sl-color-text);
+				border-radius: 0.5rem;
+				cursor: pointer;
+				transition: all 0.2s ease;
+				font-size: 0.875rem;
+				font-weight: 500;
+			}
+
+			.filter-btn.active,
+			.filter-btn:hover {
+				background: var(--sl-color-accent);
+				color: white;
+				border-color: var(--sl-color-accent);
+			}
+
+			.stats {
+				text-align: center;
+				margin: 1rem 0;
+				color: var(--sl-color-text);
+				opacity: 0.8;
+				font-size: 0.875rem;
+			}
+
+			.icon-grid {
+				display: grid;
+				grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+				gap: 1rem;
+				margin-top: 2rem;
+			}
+
+			.icon-item {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				padding: 1rem;
+				border: 1px solid var(--sl-color-hairline-light);
+				border-radius: 0.5rem;
+				transition: all 0.2s ease;
+				background: var(--sl-color-bg);
+				cursor: pointer;
+			}
+
+			.icon-item:hover {
+				box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+				transform: translateY(-1px);
+				border-color: var(--sl-color-accent);
+			}
+
+			.icon-display {
+				width: 24px;
+				height: 24px;
+				margin-bottom: 0.5rem;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+			}
+
+			.icon-display svg {
+				width: 24px;
+				height: 24px;
+			}
+
+			.lazy-icon {
+				opacity: 0;
+				transition: opacity 0.3s ease;
+			}
+
+			.lazy-icon.loaded {
+				opacity: 1;
+			}
+
+			.lazy-icon:not([src]) {
+				background: #f0f0f0;
+				border-radius: 4px;
+			}
+
+			.icon-name {
+				font-size: 0.75rem;
+				text-align: center;
+				word-break: break-word;
+				color: var(--sl-color-text);
+				font-weight: 500;
+			}
+
+			.icon-category {
+				font-size: 0.625rem;
+				color: var(--sl-color-text);
+				opacity: 0.7;
+				background: var(--sl-color-bg-sidebar);
+				padding: 0.125rem 0.5rem;
+				border-radius: 0.75rem;
+				margin-top: 0.25rem;
+				font-weight: 500;
+				text-transform: uppercase;
+				letter-spacing: 0.025em;
+			}
+
+			.no-results {
+				text-align: center;
+				padding: 3rem;
+				color: var(--sl-color-text);
+				opacity: 0.8;
+				font-size: 1.1rem;
+			}
+
+			/* Modal styles */
+			.modal-overlay {
+				position: fixed;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				background: rgba(0, 0, 0, 0.5);
+				display: none;
+				align-items: center;
+				justify-content: center;
+				z-index: 1000;
+				padding: 1rem;
+			}
+
+			.modal-overlay.active {
+				display: flex;
+			}
+
+			.modal {
+				background: var(--sl-color-bg);
+				border-radius: 1rem;
+				box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+				max-width: 500px;
+				width: 100%;
+				max-height: 80vh;
+				overflow-y: auto;
+				border: 1px solid var(--sl-color-hairline-light);
+			}
+
+			.modal-header {
+				padding: 1.5rem;
+				border-bottom: 1px solid var(--sl-color-hairline-light);
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+			}
+
+			.modal-title {
+				color: var(--sl-color-text);
+				font-size: 1.25rem;
+				font-weight: 700;
+				margin: 0;
+			}
+
+			.close-btn {
+				background: none;
+				border: none;
+				font-size: 1.5rem;
+				color: var(--sl-color-text);
+				opacity: 0.7;
+				cursor: pointer;
+				padding: 0.25rem;
+				border-radius: 0.25rem;
+				transition: all 0.2s ease;
+			}
+
+			.close-btn:hover {
+				opacity: 1;
+				background: var(--sl-color-bg-sidebar);
+			}
+
+			.modal-content {
+				padding: 1.5rem;
+			}
+
+			.icon-preview {
+				display: flex;
+				align-items: center;
+				gap: 1rem;
+				margin-bottom: 1.5rem;
+				padding: 1rem;
+				background: var(--sl-color-bg-sidebar);
+				border-radius: 0.5rem;
+			}
+
+			.icon-preview img {
+				width: 48px;
+				height: 48px;
+			}
+
+			.icon-info h3 {
+				color: var(--sl-color-text);
+				font-size: 1.125rem;
+				font-weight: 600;
+				margin: 0 0 0.25rem 0;
+			}
+
+			.icon-info .category-badge {
+				display: inline-block;
+				background: var(--sl-color-accent-high);
+				color: var(--sl-color-accent);
+				padding: 0.125rem 0.5rem;
+				border-radius: 0.25rem;
+				font-size: 0.75rem;
+				font-weight: 500;
+				text-transform: capitalize;
+			}
+
+			.association-info {
+				margin-top: 1rem;
+			}
+
+			.info-item {
+				display: flex;
+				justify-content: space-between;
+				align-items: flex-start;
+				padding: 0.75rem 0;
+				border-bottom: 1px solid var(--sl-color-hairline-light);
+			}
+
+			.info-item:last-child {
+				border-bottom: none;
+			}
+
+			.info-label {
+				font-weight: 600;
+				color: var(--sl-color-text);
+				font-size: 0.875rem;
+				min-width: 80px;
+			}
+
+			.info-value {
+				color: var(--sl-color-text);
+				font-size: 0.875rem;
+				text-align: right;
+				flex: 1;
+				margin-left: 1rem;
+				word-break: break-word;
+			}
+
+			.color-swatch {
+				display: inline-block;
+				width: 20px;
+				height: 20px;
+				border-radius: 0.25rem;
+				border: 1px solid var(--sl-color-hairline);
+				vertical-align: middle;
+				margin-left: 0.5rem;
+			}
+
+			.priority-badge {
+				background: var(--sl-color-accent-high);
+				color: var(--sl-color-accent);
+				padding: 0.125rem 0.5rem;
+				border-radius: 0.25rem;
+				font-weight: 600;
+				font-size: 0.75rem;
+			}
+
+			.no-association {
+				color: var(--sl-color-text);
+				opacity: 0.7;
+				font-style: italic;
+				text-align: center;
+				padding: 2rem;
+			}
+
+			@media (max-width: 768px) {
+				.container {
+					padding: 1rem;
+				}
+
+				.content {
+					padding: 1.5rem;
+				}
+
+				.icon-grid {
+					grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+					gap: 0.5rem;
+				}
+
+				.filter-buttons {
+					flex-direction: column;
+					align-items: center;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<nav class="nav-header">
+				<a href="/">← Back to Home</a> |
+				<a href="/installation">Installation</a> |
+				<a href="/usage">Usage Guide</a>
+			</nav>
+
+			<div class="content">
+				<h1>🎨 Icon Gallery</h1>
+				<p style="text-align: center; font-size: 1.1rem; color: #666; margin-bottom: 2rem;">
+					Browse and search through all {allIcons.length} available icons
+				</p>
+
+				<div class="search-section">
+					<input
+						type="text"
+						id="searchInput"
+						class="search-input"
+						placeholder="Search icons by name or association..."
+					/>
+
+					<div class="filter-buttons">
+						<button class="filter-btn active" data-category="all">All ({allIcons.length})</button>
+						<button class="filter-btn" data-category="files">Files ({icons.files.length})</button>
+						<button class="filter-btn" data-category="folders">Folders ({icons.folders.length})</button>
+						<button class="filter-btn" data-category="foldersOpen">Folders Open ({icons.foldersOpen.length})</button>
+						<button class="filter-btn" data-category="ui">UI ({icons.ui.length})</button>
+					</div>
+
+					<div class="stats">
+						<span id="resultCount">{allIcons.length}</span> icons shown
+					</div>
+				</div>
+
+				<div class="icon-grid" id="iconGrid">
+					{allIcons.map(icon => (
+						<div class="icon-item" data-category={icon.category} data-name={icon.name} data-association={JSON.stringify(icon.association)}>
+							<div class="icon-display">
+								<img data-src={`/icons/${icon.category}/${icon.name}.svg`} alt={icon.name} width="24" height="24" class="lazy-icon" />
+							</div>
+							<div class="icon-name">{icon.name}</div>
+							<div class="icon-category">{icon.category}</div>
+						</div>
+					))}
+				</div>
+
+				<div class="no-results" id="noResults" style="display: none;">
+					<h3>No icons found</h3>
+					<p>Try adjusting your search terms or filters</p>
+				</div>
+			</div>
+		</div>
+
+		<!-- Modal -->
+		<div class="modal-overlay" id="modalOverlay">
+			<div class="modal">
+				<div class="modal-header">
+					<h2 class="modal-title" id="modalTitle">Icon Details</h2>
+					<button class="close-btn" id="closeModal">&times;</button>
+				</div>
+				<div class="modal-content" id="modalContent">
+					<!-- Content will be populated by JavaScript -->
+				</div>
+			</div>
+		</div>
+
+		<script>
+			// JavaScript for search and filter functionality
+			const searchInput = document.getElementById('searchInput');
+			const filterButtons = document.querySelectorAll('.filter-btn');
+			const iconGrid = document.getElementById('iconGrid');
+			const resultCount = document.getElementById('resultCount');
+			const noResults = document.getElementById('noResults');
+			const allIconItems = document.querySelectorAll('.icon-item');
+			const modalOverlay = document.getElementById('modalOverlay');
+			const modalTitle = document.getElementById('modalTitle');
+			const modalContent = document.getElementById('modalContent');
+			const closeModal = document.getElementById('closeModal');
+
+			let currentFilter = 'all';
+			let currentSearch = '';
+
+			// Search functionality
+			searchInput.addEventListener('input', function() {
+				currentSearch = this.value.toLowerCase();
+				filterIcons();
+			});
+
+			// Filter functionality
+			filterButtons.forEach(button => {
+				button.addEventListener('click', function() {
+					// Update active button
+					filterButtons.forEach(btn => btn.classList.remove('active'));
+					this.classList.add('active');
+
+					currentFilter = this.getAttribute('data-category');
+					filterIcons();
+				});
+			});
+
+			function filterIcons() {
+				let visibleCount = 0;
+
+				allIconItems.forEach(item => {
+					const category = item.getAttribute('data-category');
+					const name = item.getAttribute('data-name').toLowerCase();
+
+					// Check category filter
+					const categoryMatch = currentFilter === 'all' || category === currentFilter;
+
+					// Check search filter
+					const searchMatch = currentSearch === '' || name.includes(currentSearch);
+
+					if (categoryMatch && searchMatch) {
+						item.style.display = 'flex';
+						visibleCount++;
+					} else {
+						item.style.display = 'none';
+					}
+				});
+
+				// Update result count
+				resultCount.textContent = visibleCount;
+
+				// Show/hide no results message
+				if (visibleCount === 0) {
+					iconGrid.style.display = 'none';
+					noResults.style.display = 'block';
+				} else {
+					iconGrid.style.display = 'grid';
+					noResults.style.display = 'none';
+				}
+			}
+
+			// Modal functionality
+			function showIconDetails(iconItem) {
+				const iconName = iconItem.getAttribute('data-name');
+				const iconCategory = iconItem.getAttribute('data-category');
+				const associationData = iconItem.getAttribute('data-association');
+				const iconSrc = iconItem.querySelector('img').src || iconItem.querySelector('img').getAttribute('data-src');
+
+				let association = null;
+				try {
+					association = JSON.parse(associationData);
+				} catch (e) {
+					// Association data is null or invalid
+				}
+
+				modalTitle.textContent = `${iconName} Icon`;
+
+				let content = `
+					<div class="icon-preview">
+						<img src="${iconSrc}" alt="${iconName}" />
+						<div class="icon-info">
+							<h3>${iconName}</h3>
+							<span class="category-badge">${iconCategory}</span>
+						</div>
+					</div>
+				`;
+
+				if (association) {
+					content += `
+						<div class="association-info">
+							<h4 style="color: var(--sl-color-text); font-size: 1rem; margin-bottom: 1rem; font-weight: 600;">Association Details</h4>
+							<div class="info-item">
+								<span class="info-label">Name:</span>
+								<span class="info-value">${association.name}</span>
+							</div>
+							<div class="info-item">
+								<span class="info-label">Type:</span>
+								<span class="info-value">${association.type === 'regex' ? 'Pattern-based' : 'Type-based'}</span>
+							</div>
+							<div class="info-item">
+								<span class="info-label">Priority:</span>
+								<span class="info-value"><span class="priority-badge">${association.priority}</span></span>
+							</div>
+							<div class="info-item">
+								<span class="info-label">Color:</span>
+								<span class="info-value">${association.iconColor}<span class="color-swatch" style="background-color: ${association.iconColor};"></span></span>
+							</div>
+							<div class="info-item">
+								<span class="info-label">Pattern:</span>
+								<span class="info-value"><code style="background: var(--sl-color-bg-sidebar); padding: 0.25rem 0.5rem; border-radius: 0.25rem; font-size: 0.75rem;">${association.pattern}</code></span>
+							</div>
+							${association.fileNames && association.fileNames !== 'N/A' ? `
+							<div class="info-item">
+								<span class="info-label">Examples:</span>
+								<span class="info-value" style="font-size: 0.75rem; opacity: 0.8;">${association.fileNames.split(',').slice(0, 3).join(', ')}${association.fileNames.split(',').length > 3 ? '...' : ''}</span>
+							</div>
+							` : ''}
+						</div>
+					`;
+				} else {
+					content += `
+						<div class="no-association">
+							<p>No association data available for this icon.</p>
+							<p style="font-size: 0.875rem; margin-top: 0.5rem;">This icon may be used for UI elements or custom associations.</p>
+						</div>
+					`;
+				}
+
+				modalContent.innerHTML = content;
+				modalOverlay.classList.add('active');
+			}
+
+			function closeModalHandler() {
+				modalOverlay.classList.remove('active');
+			}
+
+			// Icon click handlers
+			allIconItems.forEach(item => {
+				item.addEventListener('click', () => showIconDetails(item));
+			});
+
+			// Modal close handlers
+			closeModal.addEventListener('click', closeModalHandler);
+			modalOverlay.addEventListener('click', (e) => {
+				if (e.target === modalOverlay) {
+					closeModalHandler();
+				}
+			});
+
+			// Escape key to close modal
+			document.addEventListener('keydown', (e) => {
+				if (e.key === 'Escape' && modalOverlay.classList.contains('active')) {
+					closeModalHandler();
+				}
+			});
+
+			// Lazy loading implementation
+			const lazyImages = document.querySelectorAll('.lazy-icon');
+
+			const imageObserver = new IntersectionObserver((entries, observer) => {
+				entries.forEach(entry => {
+					if (entry.isIntersecting) {
+						const img = entry.target;
+						const src = img.getAttribute('data-src');
+
+						img.setAttribute('src', src);
+						img.classList.add('loaded');
+						img.removeAttribute('data-src');
+
+						observer.unobserve(img);
+					}
+				});
+			}, {
+				rootMargin: '50px'
+			});
+
+			lazyImages.forEach(img => imageObserver.observe(img));
+
+			// Initialize
+			filterIcons();
+		</script>
+	</body>
+</html>

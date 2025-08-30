@@ -1,0 +1,138 @@
+---
+title: Installation
+description: Step-by-step guide to install the Atom Material Icons plugin in your JetBrains IDE.
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+## Requirements
+
+- **JetBrains IDE**: IntelliJ IDEA, WebStorm, PyCharm, PhpStorm, Android Studio, or any other JetBrains IDE
+- **IDE Version**: 2020.1 or later (recommended: latest version)
+- **Java**: JDK 11 or higher
+
+## Installation Methods
+
+<Tabs>
+  <TabItem label="JetBrains Marketplace (Recommended)">
+
+This is the easiest and most recommended way to install the plugin.
+
+1. **Open Settings/Preferences**
+  - In your JetBrains IDE, go to `File > Settings` (Windows/Linux) or `IntelliJ IDEA > Preferences` (macOS)
+  - **Keyboard shortcut**: `Ctrl+Alt+S` (Windows/Linux) or `Cmd+,` (macOS)
+
+2. **Navigate to Plugins**
+  - In the Settings window, click on `Plugins` in the left sidebar
+
+3. **Search for the Plugin**
+  - Click on the `Marketplace` tab and search for `"Atom Material Icons"` or `"File Icons"`
+
+4. **Install the Plugin**
+  - Click the `Install` button next to the "Atom Material Icons" plugin by Elior Boukhobza
+
+5. **Restart Your IDE**
+  - After installation, restart your IDE to activate the plugin
+
+  </TabItem>
+  <TabItem label="Manual Installation">
+
+Download and install the plugin manually if you can't access the marketplace.
+
+1. **Download the Plugin**
+  - Download the latest plugin ZIP file from the [GitHub releases page](https://github.com/mallowigi/a-file-icon-idea/releases)
+
+2. **Open Plugin Settings**
+  - Go to `File > Settings > Plugins` (or `IntelliJ IDEA > Preferences > Plugins` on macOS)
+
+3. **Install from Disk**
+  - Click the gear icon ⚙️ and select `"Install Plugin from Disk..."`
+
+4. **Select ZIP File**
+  - Navigate to and select the downloaded ZIP file, then click `OK`
+
+5. **Restart IDE**
+  - Restart your IDE to complete the installation
+
+  </TabItem>
+  <TabItem label="Build from Source">
+
+For developers who want to build the plugin from source code.
+
+1. **Clone the Repository**
+   ```bash
+   git clone https://github.com/mallowigi/a-file-icon-idea.git
+   cd a-file-icon-idea
+   ```
+
+2. **Build the Plugin**
+   ```bash
+   ./gradlew buildPlugin
+   ```
+   The built plugin will be located in `build/distributions/`
+
+3. **Install the Built Plugin**
+   Follow the Manual Installation steps using the ZIP file from `build/distributions/`
+
+  </TabItem>
+</Tabs>
+
+## Verification
+
+After installation, verify that the plugin is working correctly:
+
+1. Open any project in your IDE
+2. Check if file icons have changed to material design icons
+3. Go to `Settings > Appearance & Behavior > Atom Material Icons`
+4. You should see the plugin configuration options
+
+### What You Should See
+
+Once the plugin is successfully installed and activated, your IDE file explorer will display beautiful material design icons:
+
+**File Icons:**
+![File Icons Preview](https://raw.githubusercontent.com/mallowigi/iconGenerator/master/assets/files.png)
+
+**Folder Icons:**
+![Folder Icons Preview](https://raw.githubusercontent.com/mallowigi/iconGenerator/master/assets/folders.png)
+
+:::tip[Success Indicators]
+
+- File icons should automatically change to material design alternatives
+- The plugin settings page should be accessible
+- Folder icons should display contextual designs based on their names
+  :::
+
+## Troubleshooting
+
+### Plugin Not Showing Up
+
+If the plugin doesn't appear after installation:
+
+- Make sure you restarted the IDE completely
+- Check if your IDE version is supported (2020.1+)
+- Verify the plugin is enabled in `Settings > Plugins`
+
+### Icons Not Changing
+
+If icons remain unchanged:
+
+- Go to `Settings > Atom Material Icons` and enable the plugin
+- Try toggling the "File Icons" option off and on
+- Restart the IDE after making changes
+
+### Performance Issues
+
+If you experience performance issues:
+
+- Reduce the icon size in settings
+- Disable unused features like "Hollow Folders" or "Monochrome Filter"
+- Consider using the minimal icon set
+
+## What's Next?
+
+Now that you have the plugin installed, learn how to use and customize it:
+
+- [Basic Usage](/usage/basic) - Learn the fundamentals
+- [Configuration](/usage/configuration) - Customize the plugin
+- [Features](/features/file-icons) - Explore all features
