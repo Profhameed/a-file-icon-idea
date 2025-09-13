@@ -2,6 +2,12 @@
 
 ----
 
+## 103.0.0 (10.3.0)
+
+### Fixes
+
+- Fix the White Square Issue on Windows (thanks @KrisAphalon)
+
 ## 102.0.0 (10.2.0)
 
 ### Fixes
