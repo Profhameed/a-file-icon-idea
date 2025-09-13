@@ -33,7 +33,7 @@ val platformVersion: String by project
 dependencies {
   intellijPlatform {
     intellijIdeaUltimate(platformVersion, useInstaller = false)
-    instrumentationTools()
+    // instrumentationTools()
 
     pluginVerifier()
     zipSigner()

@@ -31,7 +31,7 @@ val riderVersion: String by project
 dependencies {
   intellijPlatform {
     rider(riderVersion, useInstaller = false)
-    instrumentationTools()
+    // instrumentationTools()
 
     pluginVerifier()
     zipSigner()

@@ -82,7 +82,7 @@ plugins {
 dependencies {
   intellijPlatform {
     intellijIdeaUltimate(platformVersion, useInstaller = false)
-    instrumentationTools()
+    // instrumentationTools()
     //    local(properties("idePath").get())
 
     pluginVerifier()
