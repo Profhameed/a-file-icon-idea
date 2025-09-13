@@ -37,12 +37,16 @@ class BigIconsPatcher : SvgPatcher {
   private var hasCustomLineHeight = false
   private var hasCustomSize = false
 
-  override fun digest(): LongArray = longArrayOf(
-    hasCustomSize.toString().toHash(),
-    hasCustomLineHeight.toString().toHash(),
-    customIconSize.toString().toHash(),
-    customLineHeight.toString().toHash(),
-  )
+  override fun digest(): LongArray {
+    val entries = mutableListOf<Long>()
+    // Always include line height related settings in the digest
+    entries += hasCustomLineHeight.toString().toHash()
+    entries += customLineHeight.toString().toHash()
+    entries += hasCustomSize.toString().toHash()
+    entries += customIconSize.toString().toHash()
+
+    return entries.toLongArray()
+  }
 
   override fun patch(attributes: MutableMap<String, String>): Unit = patchSizes(attributes)
 

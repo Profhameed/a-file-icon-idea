@@ -29,6 +29,7 @@ import com.intellij.openapi.components.service
 import com.intellij.ui.svg.SvgAttributePatcher
 import com.intellij.util.SVGLoader
 import com.intellij.util.SVGLoader.SvgElementColorPatcherProvider
+import com.mallowigi.config.AtomSettingsConfig
 import com.mallowigi.utils.getValue
 import org.jetbrains.annotations.NonNls
 import java.util.*
@@ -67,13 +68,17 @@ class MainSvgPatcher : SvgElementColorPatcherProvider {
   }
 
   /** Create patcher for path. */
-  override fun attributeForPath(path: String): SvgAttributePatcher = createPatcher()
+  override fun attributeForPath(path: String): SvgAttributePatcher = createPatcher(path)
 
-  private fun createPatcher(): SvgAttributePatcher = object : SvgAttributePatcher {
+  private fun createPatcher(path: String): SvgAttributePatcher = object : SvgAttributePatcher {
     override fun patchColors(attributes: MutableMap<String, String>) {
-      patchers.forEach { it.patch(attributes) }
+      val useFiltered = !AtomSettingsConfig.instance.isEnabledUIIcons && isWindowsMenuIcon(path)
+      val effectivePatchers: Iterable<SvgPatcher> = if (useFiltered) patchers.filterNot { it is BigIconsPatcher } else patchers
+      effectivePatchers.forEach { it.patch(attributes) }
     }
   }
+
+  private fun isWindowsMenuIcon(path: String): Boolean = path.contains("windowsMenu@20x20", ignoreCase = true)
 
   override fun digest(): LongArray {
     val longArrays = mutableListOf<LongArray>()
