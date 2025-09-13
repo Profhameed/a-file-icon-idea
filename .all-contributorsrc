@@ -5,6 +5,17 @@
   "imageSize": 100,
   "commit": false,
   "contributors": [
+  {
+        "login": "KrisAphalon",
+        "name": "Krzysztof Kaczmarzyk",
+        "avatar_url": "https://avatars.githubusercontent.com/u/25371882?v=4",
+        "profile": "https://github.com/krisaphalon",
+        "contributions": [
+          "infra",
+          "code",
+          "plugin"
+        ]
+      },
     {
       "login": "Unthrottled",
       "name": "Alex Simons",
