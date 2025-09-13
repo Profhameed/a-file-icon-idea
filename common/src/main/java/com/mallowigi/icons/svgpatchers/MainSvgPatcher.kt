@@ -50,12 +50,6 @@ class MainSvgPatcher : SvgElementColorPatcherProvider {
     CustomColorPatcher(),
   )
 
-  @NonNls
-  private val IGNORED_PATHS = setOf(
-    "expui/general/windowsMenu@20x20.svg",
-    "expui/general/windowsMenu@20x20_dark.svg",
-  )
-
   /**
    * Add patcher to the OtherPatcher
    *
@@ -73,13 +67,7 @@ class MainSvgPatcher : SvgElementColorPatcherProvider {
   }
 
   /** Create patcher for path. */
-  override fun attributeForPath(path: String): SvgAttributePatcher? {
-    if (IGNORED_PATHS.contains(path)) {
-      return null
-    }
-
-    return createPatcher()
-  }
+  override fun attributeForPath(path: String): SvgAttributePatcher = createPatcher()
 
   private fun createPatcher(): SvgAttributePatcher = object : SvgAttributePatcher {
     override fun patchColors(attributes: MutableMap<String, String>) {
