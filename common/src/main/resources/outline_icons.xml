@@ -334,6 +334,7 @@
     <replacePath path="/actions/diagramDiff.svg"/>
     <replacePath path="/expui/actions/diagramDiff.svg"/>
     <replacePath path="/expui/graph/graphLayout.svg"/>
+    <replacePath path="/expui/hierarchy/classHierarchy.svg"/>
   </iconReplacement>
 
   <iconReplacement icon="/outline/diff.svg">
@@ -800,7 +801,12 @@
 
   <iconReplacement icon="/outline/openin.svg">
     <replacePath path="/expui/general/openInToolWindow.svg"/>
+    <replacePath path="/expui/ide/externalLink.svg"/>
+    <replacePath path="/expui/ide/externalLinkWhite.svg"/>
+    <replacePath path="/ide/external_link_arrow.svg"/>
+    <replacePath path="/ide/externalLinkArrowWhite.svg"/>
     <replacePath path="/general/openInToolWindow.svg"/>
+    <replacePath path="/plugins/datagrip/expui/externalLink.svg"/>
   </iconReplacement>
 
   <iconReplacement icon="/outline/outlet.svg">
@@ -994,6 +1000,16 @@
     <replacePath path="/actions/searchNewLineHover.svg"/>
   </iconReplacement>
 
+  <iconReplacement icon="/outline/rhombusLarge.svg">
+    <replacePath path="/hierarchy/supertypes.svg"/>
+    <replacePath path="/expui/hierarchy/supertypes.svg"/>
+  </iconReplacement>
+
+  <iconReplacement icon="/outline/rhombusSmall.svg">
+    <replacePath path="/hierarchy/subtypes.svg"/>
+    <replacePath path="/expui/hierarchy/subtypes.svg"/>
+  </iconReplacement>
+
   <iconReplacement icon="/outline/rollback.svg">
     <replacePath path="/actions/rollback.svg"/>
     <replacePath path="/diff/revert.svg"/>
@@ -1039,6 +1055,12 @@
   <iconReplacement icon="/outline/save.svg">
     <replacePath path="/actions/menu-saveall.svg"/>
     <replacePath path="/expui/general/save.svg"/>
+  </iconReplacement>
+
+  <iconReplacement icon="/outline/scope.svg">
+    <replacePath path="/expui/ide/localScope.svg"/>
+    <replacePath path="/ide/localScope.svg"/>
+    <replacePath path="/ide/localScopeAction.svg"/>
   </iconReplacement>
 
   <iconReplacement icon="/outline/scrollDown.svg">
@@ -1107,6 +1129,7 @@
   <iconReplacement icon="/outline/share.svg">
     <replacePath path="/actions/share.svg"/>
     <replacePath path="/codeWithMe/cwmShared.svg"/>
+    <replacePath path="/expui/ide/sharedScope.svg"/>
   </iconReplacement>
 
   <iconReplacement icon="/outline/separator.svg">
@@ -1219,6 +1242,10 @@
     <replacePath path="/debugger/threads.svg"/>
     <replacePath path="/expui/breakpoints/threads.svg"/>
     <replacePath path="/expui/debugger/threads.svg"/>
+  </iconReplacement>
+
+  <iconReplacement icon="/outline/tools.svg">
+    <replacePath path="/expui/ide/configFile.svg"/>
   </iconReplacement>
 
   <iconReplacement icon="/outline/topLeft.svg">
@@ -1665,7 +1692,6 @@
     <replacePath path="/expui/fileTypes/scratches.svg"/>
   </iconReplacement>
   <!--endregion-->
-
 
   <!--region General -->
   <iconReplacement icon="/outline/autoscroll.svg">
