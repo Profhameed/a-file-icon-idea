@@ -101,6 +101,7 @@
   </iconReplacement>
 
   <iconReplacement icon="/outline/bookmark.svg">
+    <replacePath path="/actions/addToDictionary.svg"/>
     <replacePath path="/expui/bookmarks/bookmark.svg"/>
   </iconReplacement>
 
@@ -135,6 +136,12 @@
     <replacePath path="/expui/codeInsight/quickfixOffBulb.svg"/>
     <replacePath path="/expui/editor/quickfixOffBulb.svg"/>
   </iconReplacement>
+
+  <iconReplacement icon="/outline/bulletList.svg">
+    <replacePath path="/actions/addList.svg"/>
+    <replacePath path="/actions/properties.svg"/>
+  </iconReplacement>
+
 
   <iconReplacement icon="/outline/calculate.svg">
     <replacePath path="/debugger/db_evaluateNode.svg"/>
@@ -172,6 +179,10 @@
     <replacePath path="/darcula/checkBoxSelected.svg"/>
     <replacePath path="/diff/gutterCheckBoxSelected.svg"/>
     <replacePath path="/expui/diff/gutterCheckBoxSelected.svg"/>
+  </iconReplacement>
+
+  <iconReplacement icon="/outline/checkList.svg">
+    <replacePath path="/actions/moveToAnotherChangelist.svg"/>
   </iconReplacement>
 
   <iconReplacement icon="/outline/CheckMulticaret.svg">
@@ -641,9 +652,6 @@
   </iconReplacement>
 
   <iconReplacement icon="/outline/list.svg">
-    <replacePath path="/actions/addList.svg"/>
-    <replacePath path="/actions/moveToAnotherChangelist.svg"/>
-    <replacePath path="/actions/properties.svg"/>
     <replacePath path="/actions/quickList.svg"/>
     <replacePath path="/expui/general/listFiles.svg"/>
   </iconReplacement>
@@ -1712,7 +1720,6 @@
   </iconReplacement>
   <!--endregion-->
 
-  <!--region General -->
   <iconReplacement icon="/outline/projectWideAnalysisOff.svg">
     <replacePath path="/actions/projectWideAnalysisOff.svg"/>
     <replacePath path="/expui/general/projectWideAnalysisOff.svg"/>
@@ -1722,7 +1729,7 @@
     <replacePath path="/actions/projectWideAnalysisOn.svg"/>
     <replacePath path="/expui/general/projectWideAnalysisOn.svg"/>
   </iconReplacement>
-  <!--endregion-->
+
   <iconReplacement icon="/outline/annotation@14x14.svg">
     <replacePath path="/expui/gutter/extAnnotation.svg"/>
   </iconReplacement>
