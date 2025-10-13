@@ -27,6 +27,7 @@
     <replacePath path="/actions/addFile.svg"/>
     <replacePath path="/expui/actions/addFile.svg"/>
     <replacePath path="/expui/bookmarks/addBookmarksList.svg"/>
+    <replacePath path="/expui/fileTypes/addAny.svg"/>
     <replacePath path="/expui/general/add.svg"/>
     <replacePath path="/fileTypes/addAny.svg"/>
     <replacePath path="/general/add.svg"/>
@@ -372,6 +373,7 @@
     <replacePath path="/actions/edit.svg"/>
     <replacePath path="/codeWithMe/cwmPermissionEdit.svg"/>
     <replacePath path="/expui/codeWithMe/cwmPermissionEdit.svg"/>
+    <replacePath path="/expui/fileTypes/modified.svg"/>
     <replacePath path="/expui/general/edit.svg"/>
     <replacePath path="/general/inline_edit.svg"/>
     <replacePath path="/general/inline_edit_hovered.svg"/>
@@ -830,12 +832,18 @@
     <replacePath path="/general/autohideOff.svg"/>
     <replacePath path="/general/pin_tab.svg"/>
     <replacePath path="/expui/general/pin.svg"/>
-    <replacePath path="/expui/general/pinHovered.svg"/>
     <replacePath path="/toolbar/pin.svg"/>
+  </iconReplacement>
+
+  <iconReplacement icon="/outline/pinHovered.svg">
+    <replacePath path="/expui/general/pinHovered.svg"/>
   </iconReplacement>
 
   <iconReplacement icon="/outline/pinSelected.svg">
     <replacePath path="/expui/general/pinSelected.svg"/>
+  </iconReplacement>
+
+  <iconReplacement icon="/outline/pinSelectedHovered.svg">
     <replacePath path="/expui/general/pinSelectedHovered.svg"/>
   </iconReplacement>
 
@@ -844,8 +852,8 @@
     <replacePath path="/expui/run/attachToProcess.svg"/>
   </iconReplacement>
 
-  <iconReplacement icon="/outline/plugoff.svg">
-    <replacePath path="/general/uninstallPlugin.svg"/>
+  <iconReplacement icon="/outline/plugin@14x14.svg">
+    <replacePath path="/expui/general/plugin@14x14.svg"/>
   </iconReplacement>
 
   <iconReplacement icon="/outline/preview.svg">
@@ -943,6 +951,10 @@
     <replacePath path="/actions/resetView.svg"/>
     <replacePath path="/expui/general/reset.svg"/>
     <replacePath path="/general/reset.svg"/>
+  </iconReplacement>
+
+  <iconReplacement icon="/outline/restart@14x14.svg">
+    <replacePath path="/expui/gutter/rerun.svg"/>
   </iconReplacement>
 
   <iconReplacement icon="/outline/restart.svg">
@@ -1099,6 +1111,7 @@
 
   <iconReplacement icon="/outline/separator.svg">
     <replacePath path="/general/separatorH.svg"/>
+    <replacePath path="/expui/general/separatorH.svg"/>
   </iconReplacement>
 
   <iconReplacement icon="/outline/shortcutFilter.svg">
@@ -1434,6 +1447,7 @@
   <iconReplacement icon="/outline/users.svg">
     <replacePath path="/codeWithMe/cwmAccess.svg"/>
     <replacePath path="/expui/codeWithMe/cwmAccess.svg"/>
+    <replacePath path="/expui/general/addAccount.svg"/>
     <replacePath path="/codeWithMe/cwmLogoToolbar.svg"/>
   </iconReplacement>
 
@@ -1604,6 +1618,55 @@
   </iconReplacement>
   <!--endregion-->
 
+  <!--region code insight-->
+  <iconReplacement icon="/outline/inlayGear.svg">
+    <replacePath path="/actions/inlayGear.svg"/>
+    <replacePath path="/expui/codeInsight/inlaySettings.svg"/>
+    <replacePath path="/expui/editor/inlaySettings.svg"/>
+  </iconReplacement>
+
+  <iconReplacement icon="/outline/inlayGlobe.svg">
+    <replacePath path="/expui/codeInsight/inlayGlobe.svg"/>
+    <replacePath path="/expui/editor/inlayGlobe.svg"/>
+  </iconReplacement>
+
+  <iconReplacement icon="/outline/inlaySecuredShield.svg">
+    <replacePath path="/expui/codeInsight/inlaySecuredShield.svg"/>
+    <replacePath path="/expui/editor/inlaySecuredShield.svg"/>
+  </iconReplacement>
+
+  <iconReplacement icon="/outline/inlayRenameInComments.svg">
+    <replacePath path="/expui/codeInsight/inlayRenameInComments.svg"/>
+    <replacePath path="/expui/editor/inlayRenameInComments.svg"/>
+  </iconReplacement>
+
+  <iconReplacement icon="/outline/inlayRenameInCommentsActive.svg">
+    <replacePath path="/expui/codeInsight/inlayRenameInCommentsActive.svg"/>
+    <replacePath path="/expui/editor/inlayRenameInCommentsActive.svg"/>
+  </iconReplacement>
+
+  <iconReplacement icon="/outline/inlayRenameInNoCodeFiles.svg">
+    <replacePath path="/expui/codeInsight/inlayRenameInNoCodeFiles.svg"/>
+    <replacePath path="/expui/editor/inlayRenameInNoCodeFiles.svg"/>
+  </iconReplacement>
+
+  <iconReplacement icon="/outline/inlayRenameInNoCodeFilesActive.svg">
+    <replacePath path="/expui/codeInsight/inlayRenameInNoCodeFilesActive.svg"/>
+    <replacePath path="/expui/editor/inlayRenameInNoCodeFilesActive.svg"/>
+  </iconReplacement>
+  <!--endregion-->
+
+  <!--region File Types -->
+  <iconReplacement icon="/outline/asterisk.svg">
+    <replacePath path="/expui/fileTypes/changedFiles.svg"/>
+  </iconReplacement>
+
+  <iconReplacement icon="/outline/note.svg">
+    <replacePath path="/expui/fileTypes/scratches.svg"/>
+  </iconReplacement>
+  <!--endregion-->
+
+
   <!--region General -->
   <iconReplacement icon="/outline/autoscroll.svg">
     <replacePath path="/general/locate.svg"/>
@@ -1680,45 +1743,6 @@
   <iconReplacement icon="/outline/todoQuestion.svg">
     <replacePath path="/general/todoQuestion.svg"/>
   </iconReplacement>
-  <!--endregion-->
-
-  <!--region code insight-->
-  <iconReplacement icon="/outline/inlayGear.svg">
-    <replacePath path="/actions/inlayGear.svg"/>
-    <replacePath path="/expui/codeInsight/inlaySettings.svg"/>
-    <replacePath path="/expui/editor/inlaySettings.svg"/>
-  </iconReplacement>
-
-  <iconReplacement icon="/outline/inlayGlobe.svg">
-    <replacePath path="/expui/codeInsight/inlayGlobe.svg"/>
-    <replacePath path="/expui/editor/inlayGlobe.svg"/>
-  </iconReplacement>
-
-  <iconReplacement icon="/outline/inlaySecuredShield.svg">
-    <replacePath path="/expui/codeInsight/inlaySecuredShield.svg"/>
-    <replacePath path="/expui/editor/inlaySecuredShield.svg"/>
-  </iconReplacement>
-
-  <iconReplacement icon="/outline/inlayRenameInComments.svg">
-    <replacePath path="/expui/codeInsight/inlayRenameInComments.svg"/>
-    <replacePath path="/expui/editor/inlayRenameInComments.svg"/>
-  </iconReplacement>
-
-  <iconReplacement icon="/outline/inlayRenameInCommentsActive.svg">
-    <replacePath path="/expui/codeInsight/inlayRenameInCommentsActive.svg"/>
-    <replacePath path="/expui/editor/inlayRenameInCommentsActive.svg"/>
-  </iconReplacement>
-
-  <iconReplacement icon="/outline/inlayRenameInNoCodeFiles.svg">
-    <replacePath path="/expui/codeInsight/inlayRenameInNoCodeFiles.svg"/>
-    <replacePath path="/expui/editor/inlayRenameInNoCodeFiles.svg"/>
-  </iconReplacement>
-
-  <iconReplacement icon="/outline/inlayRenameInNoCodeFilesActive.svg">
-    <replacePath path="/expui/codeInsight/inlayRenameInNoCodeFilesActive.svg"/>
-    <replacePath path="/expui/editor/inlayRenameInNoCodeFilesActive.svg"/>
-  </iconReplacement>
-  <!--endregion-->
 
   <iconReplacement icon="/outline/projectWideAnalysisOff.svg">
     <replacePath path="/actions/projectWideAnalysisOff.svg"/>
@@ -1732,10 +1756,12 @@
 
   <iconReplacement icon="/outline/annotation@14x14.svg">
     <replacePath path="/expui/gutter/extAnnotation.svg"/>
+    <replacePath path="/expui/gutter/extAnnotation@14x14.svg"/>
   </iconReplacement>
 
   <iconReplacement icon="/outline/applyNotConflicts@14x14.svg">
     <replacePath path="/expui/gutter/diff.svg"/>
+    <replacePath path="/expui/gutter/diff@14x14.svg"/>
   </iconReplacement>
 
   <iconReplacement icon="/outline/bookmark@14x14.svg">
@@ -1744,10 +1770,12 @@
 
   <iconReplacement icon="/outline/file@14x14.svg">
     <replacePath path="/expui/gutter/descriptionFile.svg"/>
+    <replacePath path="/expui/gutter/descriptionFile@14x14.svg"/>
   </iconReplacement>
 
   <iconReplacement icon="/outline/module@14x14.svg">
     <replacePath path="/expui/gutter/ejbModule.svg"/>
+    <replacePath path="/expui/gutter/ejbModule@14x14.svg"/>
   </iconReplacement>
 
   <iconReplacement icon="/outline/palette@14x14.svg">
@@ -1812,18 +1840,15 @@
 
   <iconReplacement icon="/outline/i18n@14x14.svg">
     <replacePath path="/expui/gutter/properties.svg"/>
+    <replacePath path="/expui/gutter/properties@14x14.svg"/>
   </iconReplacement>
 
   <iconReplacement icon="/outline/recursion@14x14.svg">
     <replacePath path="/expui/gutter/recursive.svg"/>
   </iconReplacement>
 
-  <iconReplacement icon="/outline/recursiveMethod.svg">
+  <iconReplacement icon="/outline/recursiveMethod@14x14.svg">
     <replacePath path="/expui/gutter/recursiveMethod.svg"/>
-  </iconReplacement>
-
-  <iconReplacement icon="/outline/rerun@14x14.svg">
-    <replacePath path="/expui/gutter/rerun.svg"/>
   </iconReplacement>
 
   <iconReplacement icon="/outline/run@14x14.svg">
@@ -1853,5 +1878,6 @@
   <iconReplacement icon="/outline/unique@14x14.svg">
     <replacePath path="/expui/gutter/unique.svg"/>
   </iconReplacement>
+  <!--endregion-->
 
 </root>
