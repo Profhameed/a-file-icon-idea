@@ -148,11 +148,11 @@ class AtomSettingsConfig : BaseState(), PersistentStateComponent<AtomSettingsCon
   /** Whether low power mode is enabled. */
   var isLowPowerMode: Boolean by property(true)
 
-  /** Disable indexing for the case it causes the IDE to crash */
+  /** Disable indexing for the case it causes the IDE to crash. */
   var disableIndexing: Boolean by property(false)
 
   /** Is new icons enabeld. */
-  var isNewIconsEnabeld: Boolean by property(false)
+  var isNewIconsEnabled: Boolean by property(false)
 
   /** Config state. */
   override fun getState(): AtomSettingsConfig = this
@@ -214,7 +214,7 @@ class AtomSettingsConfig : BaseState(), PersistentStateComponent<AtomSettingsCon
     isUseReduxIcons = true
     isUseRubyIcons = true
     isUseTestsIcons = true
-    isNewIconsEnabeld = false
+    isNewIconsEnabled = false
     monochromeColor = DEFAULT_MONOCHROME // NON-NLS
     opacity = DEFAULT_OPACITY
     saturation = DEFAULT_SATURATION

@@ -31,15 +31,14 @@ class OutlineIconsPatcher : IconPathPatcher() {
   private val outlineIcons: IconReplacements = IconReplacementsFactory.create("/outline_icons.xml")
 
   /** Whether the patcher should be enabled or not. */
-  var enabled: Boolean = AtomSettingsConfig.instance.isNewIconsEnabeld
+  var enabled: Boolean = AtomSettingsConfig.instance.isEnabledUIIcons && AtomSettingsConfig.instance.isNewIconsEnabled
 
   /**
-   * Get the plugin context class loader if an icon needs to be patched
+   * Get the plugin context class loader if an icon needs to be patched.
    *
    * @param path the icon path
    * @param originalClassLoader the original class loader
-   * @return the plugin class loader if the icon needs to be patched, or the
-   *     original class loader
+   * @return the plugin class loader if the icon needs to be patched, or the original class loader
    */
   override fun getContextClassLoader(path: String, originalClassLoader: ClassLoader?): ClassLoader? {
     val classLoader = javaClass.classLoader
@@ -50,12 +49,11 @@ class OutlineIconsPatcher : IconPathPatcher() {
   }
 
   /**
-   * Patch the icon path if there is an icon available
+   * Patch the icon path if there is an icon available.
    *
    * @param path the path to patch
    * @param classLoader the classloader of the icon
-   * @return the patched path to the plugin icon, or the original path if the
-   *     icon patcher is disabled
+   * @return the patched path to the plugin icon, or the original path if the icon patcher is disabled
    */
   override fun patchPath(path: String, classLoader: ClassLoader?): String? {
     if (CACHE.containsKey(path)) return CACHE[path]

@@ -395,7 +395,7 @@ class AtomSettingsConfigurable : BoundSearchableConfigurable(
         label(message("SettingsForm.isNewIconsEnabled.text"))
           .gap(RightGap.SMALL)
         cell(OnOffButton())
-          .bindSelected(settings::isNewIconsEnabeld)
+          .bindSelected(settings::isNewIconsEnabled)
       }.rowComment(message("SettingsForm.isNewIconsEnabled.toolTipText"))
 
       row {
